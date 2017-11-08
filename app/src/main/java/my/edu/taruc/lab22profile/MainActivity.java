@@ -1,10 +1,14 @@
 package my.edu.taruc.lab22profile;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import static android.content.Intent.ACTION_MAIN;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PROFILE_UPDATE = 1;
@@ -41,5 +45,46 @@ public class MainActivity extends AppCompatActivity {
             textViewName.setText(getString(R.string.name)+name);
             textViewEmail.setText(getString(R.string.email)+email);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Main Activity", "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Main Activity", "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Main Activity", "onPause");
+    }
+
+    public void visitBAIT(View v){
+        String uri = "http://bait2073.000webhostapp.com/welcome.html";
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(uri));
+        startActivity(intent);
+    }
+
+    public void showMain(View v){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        startActivity(intent);
+    }
+
+    public void showDial(View v){
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "0123456789"));
+        startActivity(intent);
+    }
+
+    public void showSendTo(View v){
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"+"seekt@tarc.edu.my"));
+        startActivity(intent);
     }
 }
